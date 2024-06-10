@@ -48,18 +48,18 @@ function transicion(mediaPlayer, evento, depurar){
 
     switch(estadoSiguiente) {
       case "WAITING":
-        mediaPlayer.contexto.pantalla = entrada;
+        mediaPlayer.contexto.pantalla = "WAITING";
         break;
       case "PLAY": 
-        mediaPlayer.contexto.pantalla = entrada;
+        mediaPlayer.contexto.pantalla = "PLAY";
         break;
 
       case "PAUSE": 
-        mediaPlayer.contexto.pantalla = entrada;
+        mediaPlayer.contexto.pantalla = "PAUSE";
         break;
 
       case "STOP": 
-        mediaPlayer.contexto.pantalla = entrada;
+        mediaPlayer.contexto.pantalla = "STOP";
         break;
        }  
   }

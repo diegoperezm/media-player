@@ -1,0 +1,108 @@
+* media-player
+
+Ejemplo simplificado de máquina de estado finito/autómata usando JavaScript.
+
+**  Eventos
+
+#+begin_src js :eval no 
+const evento = {
+  "evento":  {cargaUtil: 'evento'},
+   ... 
+};
+#+end_src
+
+** Máquina  
+
+#+begin_src js  :eval no
+const mediaPlayer = {
+  estadoActual: "ESTADO",
+  contexto: {
+    datos:  "", 
+  },
+  estados: {
+   "ESTADO": {
+     evento:   "ESTADOSIGUIENTE"
+    },
+     ...
+  }
+}
+#+end_src
+
+
+** Función transición  
+
+#+begin_src js :eval no 
+function transicion(maquina, evento, depurar){
+  const estado           = maquina.estadoActual;
+  const entrada          = evento.cargaUtil;
+  const estadoSiguiente  = maquina.estados[estado][entrada];
+
+  if(estadoSiguiente) {
+    if(depurar) print(estado,entrada,estadoSiguiente);
+
+    maquina.estadoActual = estadoSiguiente;    
+
+    switch(estadoSiguiente) {
+      case "ESTADO":
+        // ejecutar  
+        break;
+	... 
+    }  
+  }
+   return maquina;
+}
+
+#+end_src
+
+
+#+begin_src js :eval no 
+/* `digraph G {${nodos.join('\n')} ${flechas.join('\n')}}`; */
+function generarDigraph(objetoEstados) {
+  const nodos = [];
+  const flechas = [];
+  for (const estado in objetoEstados) {
+    nodos.push(`"${estado}"`);
+    for (const transicion in objetoEstados[estado]) {
+      const destino = objetoEstados[estado][transicion];
+      flechas.push(`"${estado}" -> "${destino}" [label="${transicion}"];`);
+    }
+  }
+
+  const dot = `digraph G {
+    ${flechas.join('\n')}
+  }`;
+
+  return dot;
+}
+
+const dotGraph = generarDigraph(mediaPlayer.estados);
+console.log(dotGraph); 
+#+end_src
+
+Resultado 
+
+#+begin_src  dot :eval  no 
+digraph G {
+"WAITING" -> "PLAY" [label="play"];
+"PLAY" -> "PAUSE" [label="pause"];
+"PLAY" -> "STOP" [label="stop"];
+"PAUSE" -> "PLAY" [label="play"];
+"PAUSE" -> "STOP" [label="stop"];
+"STOP" -> "PLAY" [label="play"];
+  }
+#+end_src
+
+**  Diagrama
+
+[[file:./graph.png]]
+
+
+
+** Estados
+
+
+[[file:./play.png]]
+
+[[file:./pause.png]]
+
+[[file:./stop.png]]
