@@ -106,3 +106,9 @@ digraph G {
 [[file:./pause.png]]
 
 [[file:./stop.png]]
+
+
+** Demo
+
+https://diegoperezm.github.io/media-player
+
