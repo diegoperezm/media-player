@@ -1,6 +1,6 @@
 * media-player
 
-Ejemplo simplificado de máquina de estado finito/autómata usando JavaScript.
+
 
 **  Eventos
 
